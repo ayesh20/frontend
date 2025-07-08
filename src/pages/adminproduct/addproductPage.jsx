@@ -16,7 +16,21 @@ export default function AddProductPage() {
 	const [category, setCategory] = useState("cream");
     const navigate = useNavigate()
 
-    function handleSubmit(){
+     async function handleSubmit(){
+
+const promisesArray = []
+
+		for(let i=0; i<images.length; i++){
+
+			const promise = uploadFile(images[i])
+			promisesArray[i] = promise
+
+		}
+
+		const responses = await Promise.all(promisesArray)
+		console.log(responses)	
+
+
         const altNamesInArray = alternativeNames.split(",")
         const productData = {
             productId: productId,

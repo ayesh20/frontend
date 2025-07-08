@@ -3,11 +3,11 @@ import { FaBoxArchive } from "react-icons/fa6";
 import { GiShoppingBag } from "react-icons/gi";
 import { IoPeople } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
-import ProductCard from "../components/productCard";
+import ProductsAdminPage from "./adminproduct/productcard";
+import AddProductPage from "./adminproduct/addproductPage";
 export default function AdminPage(){
-return(
-
-   <div className="w-full h-screen  flex">
+    return(
+        <div className="w-full h-screen  flex">
             <div className="w-[300px] h-full flex flex-col items-center">
                 <span className="text-3xl font-bold my-5">Admin Panel</span>
 
@@ -19,12 +19,12 @@ return(
             <div className="w-[calc(100%-300px)]  h-full">
                 <Routes path="/*">
                     <Route path="/" element={<h1>Dashboard</h1>}/>
-                    <Route path="/products" element={<p></p>}/>
+                    <Route path="/products" element={<ProductsAdminPage/>}/>
+                    <Route path="/newProduct" element={<AddProductPage/>}/>
                     <Route path="/orders" element={<h1>Orders</h1>}/>
                 </Routes>
             </div>
             
         </div>
-)
-
+    )
 }
