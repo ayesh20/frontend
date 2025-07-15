@@ -3,8 +3,8 @@ import { FaBoxArchive } from "react-icons/fa6";
 import { GiShoppingBag } from "react-icons/gi";
 import { IoPeople } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
-import ProductsAdminPage from "./adminproduct/productcard";
-import AddProductPage from "./adminproduct/addproductPage";
+import ProductsAdminPage from "./admin/productsAdminPage";
+import AddProductPage from "./admin/addProductAdminPage";
 export default function AdminPage(){
     return(
         <div className="w-full h-screen  flex">

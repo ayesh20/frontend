@@ -1,7 +1,8 @@
+
+
 import { useState } from "react"
 import toast from "react-hot-toast";
-import uploadFile from "../ulils/imageload";
-i
+import uploadFile from "../utils/mediaUpload";
 
 
 export default function TestPage(){

@@ -1,7 +1,8 @@
-export default function ProductCard(props){
+export default function ProductCard(props) {
+  const { name, image, price } = props;
 
-    return(
-        <div className="group flex flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition hover:shadow-lg">
+  return (
+    <div className="group flex flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition hover:shadow-lg">
       {/* Product image */}
       <div className="relative h-48 w-full overflow-hidden">
         <img
@@ -28,5 +29,5 @@ export default function ProductCard(props){
         </button>
       </div>
     </div>
-    )
+  );
 }
