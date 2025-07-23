@@ -5,7 +5,7 @@ import ProductsPage from "./productpage";
 export default function ClientWebPage() {
 	return <div className="w-full h-screen max-h-screen">
         <Header/>
-        <div className="w-full h-[calc(100%-100px)] bg-yellow-400">
+        <div className="w-full h-[calc(100%-100px)]">
             <Routes path="/">
                 <Route path="/" element={<h1 className="text-3xl text-center">Welcome to the Home Page</h1>}/>
                 <Route path="/products" element={<ProductsPage></ProductsPage>}/>
