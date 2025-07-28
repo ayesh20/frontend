@@ -191,7 +191,7 @@ export default function AddProductPage() {
 					>
 						Cancel
 					</Link>
-					<button onClick={handleSubmit} className="w-[200px] h-[50px] bg-black text-white border-[2px] rounded-md flex justify-center items-center ml-[20px]">
+					<button onClick={handleSubmit} className="w-[200px] h-[50px] bg-black text-white border-[2px] rounded-md flex justify-center items-center ml-[20px] cursor-pointer">
 						Add Product
 					</button>
 				</div>

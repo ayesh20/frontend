@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import uploadFile from "../../utils/mediaUpload";
 
-export default function UpdateProductPage() {
+export default function updateProductPage() {
     const location = useLocation()
     const [productId, setProductId] = useState(location.state.productId);
     const [productName, setProductName] = useState(location.state.name);
@@ -198,7 +198,7 @@ export default function UpdateProductPage() {
                     >
                         Cancel
                     </Link>
-                    <button onClick={handleSubmit} className="w-[200px] h-[50px] bg-black text-white border-[2px] rounded-md flex justify-center items-center ml-[20px]">
+                    <button onClick={handleSubmit} className="w-[200px] h-[50px] bg-black text-white border-[2px] rounded-md flex justify-center items-center ml-[20px] cursor-pointer">
                         Update Product
                     </button>
                 </div>

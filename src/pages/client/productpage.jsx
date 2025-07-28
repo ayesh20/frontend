@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import Loader from "../../components/loader"
+import ProductCard from "../../components/productCard"
 
 export default function ProductsPage(){
 
@@ -12,7 +13,8 @@ export default function ProductsPage(){
             if(loading){
                 axios.get(import.meta.env.VITE_BACKEND_URL+"/api/products").then(
                     (res)=>{
-                        setProducts(res.products)
+                        
+                        setProducts(res.data)
                         setLoading(false)
                     }
                 )
