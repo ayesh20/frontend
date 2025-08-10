@@ -75,7 +75,7 @@ export default function updateProductPage() {
         ).catch(
             (error)=>{
                 console.error("Error adding product:", error);
-                toast.error("Failed to add product");              
+                toast.error("Failed to update product");              
             }
         )
 
