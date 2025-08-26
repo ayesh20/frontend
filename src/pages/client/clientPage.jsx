@@ -4,13 +4,14 @@ import ProductsPage from "./productpage";
 import ProductOverViewPage from "./productOverView";
 import CartPage from "./cart";
 import CheckoutPage from "./checkoutPage";
+import HomePage from "../homePage";
 
 export default function ClientWebPage() {
-	return <div className="w-7xl h-screen max-h-screen">
+	return <div className="w-full h-screen max-h-screen">
         <Header/>
         <div className="w-full h-[calc(100%-100px)]">
             <Routes path="/">
-                <Route path="/" element={<h1 className="text-3xl text-center">Welcome to the Home Page</h1>}/>
+                <Route path="/" element={<HomePage/>}/>
                 <Route path="/products" element={<ProductsPage/>}/>
                 <Route path="/reviews" element={<h1 className="text-3xl text-center">Reviews Page</h1>}/>
                 <Route path="/about-us" element={<h1 className="text-3xl text-center">About Us Page</h1>}/>

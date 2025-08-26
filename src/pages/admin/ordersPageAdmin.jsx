@@ -90,7 +90,7 @@ export default function OrdersPageAdmin() {
 					})}
 				</tbody>
 			</table>
-			\
+			
 			{popupVisible && clickedOrder && (
 				<div className="fixed top-0 left-0 w-full h-full bg-[#00000050] flex justify-center items-center z-50">
 					<div className="w-full max-w-2xl max-h-[600px] bg-white rounded-lg  p-6 relative shadow-xl">

@@ -4,22 +4,29 @@ import toast from "react-hot-toast";
 import { BiEdit, BiPlus, BiTrash } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../../components/loader";
+import Paginator from "../../components/paginator";
 
 export default function ProductsAdminPage() {
 	const [products, setProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
+	const [page, setPage] = useState(1);
+	const [totalPages, setTotalPages] = useState(0);
+	const [limit, setLimit] = useState(10);
 
 	// const [a,setA] = useState(0);
 	useEffect(() => {
 		if (isLoading) {
 			axios
-				.get(import.meta.env.VITE_BACKEND_URL + "/api/products")
+				.get(import.meta.env.VITE_BACKEND_URL + "/api/products" + "/" + page + "/" + limit)
 				.then((res) => {
-					setProducts(res.data);
+					setProducts(res.data.products);
+					setTotalPages(res.data.totalPages);
+					setLoading(false);
 					setIsLoading(false);
 				});
 		}
-	}, [isLoading]);
+	}, [isLoading,loading, page, limit]);
 
 	const navigate = useNavigate();
 
@@ -113,6 +120,16 @@ export default function ProductsAdminPage() {
 			>
 				<BiPlus className="text-3xl" />
 			</Link>
+{/* //{ currentPage , totalPages, setCurrentPage , limit , setLimit} */}
+			<Paginator
+				currentPage={page}
+				totalPages={totalPages}
+				setCurrentPage={setPage}
+				limit={limit}
+				setLimit={setLimit}
+				setLoading={setLoading}
+			/>
+			
 		</div>
 	);
 }
