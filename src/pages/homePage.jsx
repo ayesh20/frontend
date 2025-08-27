@@ -1,11 +1,13 @@
 
 import toast from "react-hot-toast";
 import hero from "../assets/images/hero2.jpg";
+import Footer from "../components/footer";
 
 export default function HomePage() {
 
     return(
-        //hero section
+        <>
+        {/* Hero Section */}
         <div className="w-[1220px] h-[400px] flex items-center bg-blue-300 rounded-lg shadow-2xl m-[60px]">
             {/* Left side - Text content */}
             <div className="flex-1 pl-12 text-white">
@@ -40,10 +42,15 @@ export default function HomePage() {
                     
                 </div>
             </div>
+             
         </div>
-
-        //best seller section
-
-
+         
+        {/*best seller section*/}
+{/*footer section*/}
+        <div >
+                <Footer/>
+             </div>
+</>
+        
     );
 }

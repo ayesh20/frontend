@@ -5,6 +5,8 @@ import ProductOverViewPage from "./productOverView";
 import CartPage from "./cart";
 import CheckoutPage from "./checkoutPage";
 import HomePage from "../homePage";
+import Footer from "../../components/footer";
+import ContactUs from "../contactus";
 
 export default function ClientWebPage() {
 	return <div className="w-full h-screen max-h-screen">
@@ -15,7 +17,7 @@ export default function ClientWebPage() {
                 <Route path="/products" element={<ProductsPage/>}/>
                 <Route path="/reviews" element={<h1 className="text-3xl text-center">Reviews Page</h1>}/>
                 <Route path="/about-us" element={<h1 className="text-3xl text-center">About Us Page</h1>}/>
-                <Route path="/contact-us" element={<h1 className="text-3xl text-center">Contact Us Page</h1>}/>
+                <Route path="/contact-us" element={<ContactUs/>}/>
                 <Route
 						path="/cart"
 						element={<CartPage/>}
@@ -28,5 +30,6 @@ export default function ClientWebPage() {
 
             </Routes>
         </div>
+        
     </div>;
 }
