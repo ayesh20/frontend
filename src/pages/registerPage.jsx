@@ -186,6 +186,7 @@ export default function RegisterPage() {
                                     Sign In
                                 </Link>
                             </span>
+                            <p> <Link to="/" className="text-blue-500">home</Link> </p>
                         </div>
                     </form>
                 </div>

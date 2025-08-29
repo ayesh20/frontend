@@ -41,6 +41,7 @@ export default function ContactUs() {
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.phoneNumber || !formData.message) {
       setSubmitStatus({ type: 'error', message: 'All fields are required' });
       setIsSubmitting(false);
+
       return;
     }
 
@@ -65,7 +66,9 @@ export default function ContactUs() {
           email: '',
           phoneNumber: '',
           message: ''
-        });
+        })
+        
+        ;
       }
     ).catch(
       (error) => {

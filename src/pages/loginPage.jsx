@@ -3,11 +3,36 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { jwtDecode } from "jwt-decode";
+import { useGoogleLogin } from "@react-oauth/google"; // Add this import
+
 
 export default function LoginPage() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
+    
+    const googleLogin = useGoogleLogin({
+        onSuccess: (response) => {
+            axios.post(import.meta.env.VITE_BACKEND_URL + "/api/users/google-login", {
+                token: response.access_token
+            }).then(
+                (response) => {
+                    console.log(response.data)
+                    localStorage.setItem("token", response.data.token)
+                    toast.success("Login successful")
+                    if (response.data.role == "admin") {
+                        navigate("/admin")
+                    } else if (response.data.role == "user") {
+                        navigate("/")
+                    }
+                }
+            ).catch(
+                () => {
+                    toast.error("Google login failed")
+                }
+            )
+        }
+    })
 
     function login() {
         console.log(email, password)
@@ -19,7 +44,7 @@ export default function LoginPage() {
                 console.log(response.data)
                 localStorage.setItem("token", response.data.token)
 
-                toast.success("login successful")
+                toast.success("Login successful")
                 
                 // Decode JWT token to get user role
                 try {
@@ -78,7 +103,14 @@ export default function LoginPage() {
                 >
                     Login
                 </button>
+                <button 
+                    onClick={googleLogin} 
+                    className="w-[350px] h-[40px] bg-blue-500 rounded-xl text-white text-lg mt-5 hover:bg-blue-600 transition-all duration-300"
+                >
+                    Google Login
+                </button>
                 <p>Don't have an account? <Link to="/register" className="text-blue-500">Sign up</Link> from here</p>
+                <p> <Link to="/" className="text-blue-500">home</Link> </p>
             </div>
         </div>
     );
