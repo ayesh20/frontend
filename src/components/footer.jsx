@@ -9,11 +9,11 @@ export default function Footer() {
           {/* Left Section - Brand */}
           <div className="flex-1 max-w-md mb-12 lg:mb-0">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
-              GREENMIND
+                BEAUTYvatianal
             </h2>
             <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
               We help you find<br />
-              your dream plant
+              your best cosmetic products
             </p>
             
             {/* Social Media Icons */}
@@ -129,7 +129,7 @@ export default function Footer() {
         {/* Bottom Section - Copyright */}
         <div className="pt-6 sm:pt-8 border-t border-gray-600">
           <p className="text-gray-700 text-xs sm:text-sm text-center sm:text-left">
-            2025 all Right Reserved Term of use GREENMIND
+            2025 all Right Reserved.
           </p>
         </div>
       </div>

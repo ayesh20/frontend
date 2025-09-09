@@ -8,12 +8,13 @@ import AddProductPage from "./admin/addProductAdminPage";
 import UpdateProductPage from "./admin/updateProduct";
 import OrdersPageAdmin from "./admin/ordersPageAdmin";
 import UserPageAdmin from "./admin/userpageadmin";
+import Dashboard from "./admin/dashboard";
 export default function AdminPage(){
     return(
         <div className="w-full h-screen  flex">
             <div className="w-[300px] h-full flex flex-col items-center bg-blue-300 gap-2.5" >
                 <span className="text-3xl font-bold my-5">Admin Panel</span>
-
+                <Link className="flex flex-row h-[60px] w-[calc(100%-10px)]  pl-3.5 items-center text-xl  gap-[25px]" to="/admin/"><IoSettings /> Dashboard</Link>
                 <Link className="flex flex-row h-[60px] w-[calc(100%-10px)]   pl-3.5 items-center text-xl  gap-[25px]" to="/admin/products"><FaBoxArchive /> Products</Link>
                 <Link className="flex flex-row h-[60px] w-[calc(100%-10px)]  pl-3.5 items-center text-xl  gap-[25px]" to="/admin/orders"><GiShoppingBag /> Orders</Link>
                 <Link className="flex flex-row h-[60px] w-[calc(100%-10px)]  pl-3.5 items-center text-xl  gap-[25px]" to="/admin/users"><IoPeople /> Users</Link>
@@ -21,7 +22,7 @@ export default function AdminPage(){
             </div>
             <div className="w-[calc(100%-300px)]  h-full  p-5 overflow-y-auto">
                 <Routes path="/*">
-                    <Route path="/" element={<h1>Dashboard</h1>}/>
+                    <Route path="/" element={<Dashboard/>}/>
                     <Route path="/products" element={<ProductsAdminPage/>}/>
                     <Route path="/newProduct" element={<AddProductPage/>}/>
                     <Route path="/orders" element={<OrdersPageAdmin/>}/>

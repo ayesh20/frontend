@@ -75,8 +75,8 @@ export default function LoginPage() {
 
     return (
         <div className="w-full h-screen bg-[url(./assets/images/login.jpg)] bg-cover bg-center flex justify-center items-center">
-            <div className="w-[500px] h-[500px] backdrop-blur-sm shadow-2xl rounded-[30px] relative gap-[20px] text-black flex flex-col items-center justify-center">
-                <h1 className="absolute top-[20px] text-2xl font-bold text-center my-5">Login</h1>
+            <div className="w-[500px] h-[550px] backdrop-blur-sm shadow-2xl rounded-[30px] relative gap-[20px] text-black flex flex-col items-center justify-center">
+                <h1 className="absolute top-[5px] text-2xl font-bold text-center my-5">Login</h1>
                 <div className="w-[350px] flex flex-col">
                     <span className="text-lg">Email</span>
                     <input 
@@ -110,6 +110,7 @@ export default function LoginPage() {
                     Google Login
                 </button>
                 <p>Don't have an account? <Link to="/register" className="text-blue-500">Sign up</Link> from here</p>
+                <p>Forget Password? <Link to="/forget" className="text-blue-500">reset password</Link> from here</p>
                 <p> <Link to="/" className="text-blue-500">home</Link> </p>
             </div>
         </div>

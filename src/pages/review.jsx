@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Star } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserReviewForm() {
   const [reviewData, setReviewData] = useState({
@@ -13,6 +14,7 @@ export default function UserReviewForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
 
   // Check authentication on component mount
   useEffect(() => {
@@ -145,9 +147,10 @@ export default function UserReviewForm() {
   };
 
   const handleLoginRedirect = () => {
-    // navigate("/login");
-    console.log("Redirect to login page");
+    // 
+    
     toast('Redirecting to login page...');
+   navigate("/login");
   };
 
   const renderStars = (interactive = false) => {
