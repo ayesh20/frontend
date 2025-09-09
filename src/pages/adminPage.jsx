@@ -9,6 +9,7 @@ import UpdateProductPage from "./admin/updateProduct";
 import OrdersPageAdmin from "./admin/ordersPageAdmin";
 import UserPageAdmin from "./admin/userpageadmin";
 import Dashboard from "./admin/dashboard";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loader from "../components/loader";
 import axios from "axios";
