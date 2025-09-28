@@ -48,7 +48,7 @@ export default function Header() {
     ];
 
 	return (
-		<header className="h-[80px] sm:h-[100px] bg-accent flex justify-between items-center px-4 sm:px-6 lg:px-8 relative z-50">
+		<header className="h-[80px] sm:h-[100px] bg-accent flex items-center px-4 sm:px-6 lg:px-8 relative z-50">
 			{/* Mobile Menu Overlay */}
 			{isOpen && (
 				<div 
@@ -131,24 +131,26 @@ export default function Header() {
 				</div>
 			)}
 
-			{/* Logo */}
-			<div className="flex items-center">
-				<button
-					className="text-white text-2xl mr-3 p-2 hover:bg-white hover:bg-opacity-10 rounded-full transition-colors md:hidden"
-					onClick={() => setIsOpen(true)}
-				>
-					<GiHamburgerMenu />
-				</button>
+			{/* Hamburger Menu - Mobile Only */}
+			<button
+				className="text-black text-3xl p-2 hover:bg-gray-200 rounded-full transition-colors md:hidden"
+				onClick={() => setIsOpen(true)}
+			>
+				<GiHamburgerMenu />
+			</button>
+
+			{/* Logo - Centered on Mobile, Left on Desktop */}
+			<div className="flex-1 flex justify-center md:justify-start md:flex-none">
 				<img
-					className="w-[100px] h-[50px] sm:w-[120px] sm:h-[60px] lg:w-[150px] lg:h-[80px] object-cover cursor-pointer"
+					className="w-[120px] h-[60px] sm:w-[130px] sm:h-[65px] lg:w-[150px] lg:h-[80px] object-cover cursor-pointer"
 					onClick={() => navigate("/")}
 					src={logo}
 					alt="Logo"
 				/>
 			</div>
 
-			{/* Desktop Navigation */}
-			<nav className="hidden md:flex items-center space-x-8">
+			{/* Desktop Navigation - Centered */}
+			<nav className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
 				{navigationItems.map((item) => (
 					<Link
 						key={item.path}
@@ -161,7 +163,7 @@ export default function Header() {
 			</nav>
 
 			{/* Desktop Right Side */}
-			<div className="hidden md:flex items-center space-x-4">
+			<div className="hidden md:flex items-center space-x-4 ml-auto">
 				{/* Cart Icon */}
 				<Link 
 					to="/cart" 
