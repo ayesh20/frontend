@@ -1,125 +1,200 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BiCart, BiStore } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { HiHome } from "react-icons/hi";
+import { HiHome, HiX } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo2.jpg";
 
 export default function Header() {
 	const navigate = useNavigate();
 	const [isOpen, setIsOpen] = useState(false);
-	const token = localStorage.getItem("token");
- const [isLoggedIn, setIsLoggedIn] = useState(false);
-   
+	const [token, setToken] = useState(localStorage.getItem("token"));
     
+    // Update token state when localStorage changes
+    useEffect(() => {
+        const handleStorageChange = () => {
+            setToken(localStorage.getItem("token"));
+        };
+        
+        window.addEventListener('storage', handleStorageChange);
+        return () => window.removeEventListener('storage', handleStorageChange);
+    }, []);
+
     // Function to handle login button click
     const handleLoginClick = () => {
+        setIsOpen(false);
         navigate('/login');
     };
 
+    // Function to handle logout
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setToken(null);
+        setIsOpen(false);
+        navigate("/login");
+    };
+
+    // Close mobile menu when clicking outside
+    const closeMobileMenu = () => {
+        setIsOpen(false);
+    };
+
+    // Navigation items
+    const navigationItems = [
+        { path: "/", label: "Home", icon: HiHome },
+        { path: "/products", label: "Products", icon: BiStore },
+        { path: "/reviews", label: "Reviews", icon: null },
+        { path: "/contact-us", label: "Contact Us", icon: null },
+    ];
+
 	return (
-		<header className="h-[100px] bg-accent flex justify-center items-center relative">
+		<header className="h-[80px] sm:h-[100px] bg-accent flex justify-between items-center px-4 sm:px-6 lg:px-8 relative z-50">
+			{/* Mobile Menu Overlay */}
 			{isOpen && (
-				<div className="fixed z-[100] top-0 right-0 w-[100vw] h-[100vh] bg-[#00000050]">
-					<div className="h-full w-[350px] bg-white flex flex-col">
-						<div className="w-full bg-accent h-[100px] flex pl-[45px] flex-row items-center gap-[20px]">
-							<GiHamburgerMenu className="text-white text-4xl  md:hidden " onClick={()=>{
-                                setIsOpen(close);
-                            }}/>
+				<div 
+					className="fixed z-[100] top-0 left-0 w-full h-full bg-black bg-opacity-50 md:hidden"
+					onClick={closeMobileMenu}
+				>
+					<div 
+						className="h-full w-[280px] sm:w-[350px] bg-white flex flex-col shadow-xl"
+						onClick={(e) => e.stopPropagation()}
+					>
+						{/* Mobile Menu Header */}
+						<div className="w-full bg-accent h-[80px] flex px-4 flex-row items-center justify-between">
 							<img
-								className="w-[150px] h-[80px] object-cover  cursor-pointer"
+								className="w-[120px] h-[60px] object-cover cursor-pointer"
 								onClick={() => {
+									setIsOpen(false);
 									navigate("/");
 								}}
 								src={logo}
 								alt="Logo"
 							/>
+							<button 
+								onClick={closeMobileMenu}
+								className="text-white text-2xl p-2 hover:bg-white hover:bg-opacity-10 rounded-full transition-colors"
+							>
+								<HiX />
+							</button>
 						</div>
-						<div className="w-full h-full flex flex-col p-[45px] items-start">
+
+						{/* Mobile Menu Content */}
+						<div className="flex-1 flex flex-col p-6 space-y-4">
+							{/* Navigation Items */}
+							{navigationItems.map((item) => (
+								<button
+									key={item.path}
+									className="text-accent text-xl flex flex-row items-center py-3 px-2 hover:bg-gray-100 rounded-lg transition-colors w-full text-left"
+									onClick={() => {
+										setIsOpen(false);
+										navigate(item.path);
+									}}
+								>
+									{item.icon && <item.icon className="text-accent text-xl mr-3" />}
+									{item.label}
+								</button>
+							))}
+
+							{/* Cart Button */}
 							<button
-								className="text-accent text-2xl flex flex-row items-center"
-								onClick={() => {
-									setIsOpen(false);
-									navigate("/");
-								}}
-							>
-								<HiHome className="text-accent text-2xl mr-2" />
-								Home
-							</button>
-                            {/* products */}
-                            <button
-								className="text-accent text-2xl flex flex-row items-center"
-								onClick={() => {
-									setIsOpen(false);
-									navigate("/products");
-								}}
-							>
-								<BiStore className="text-accent text-2xl mr-2" />
-								Products
-							</button>
-                            {/* cart */}
-                            <button
-								className="text-accent text-2xl flex flex-row items-center"
+								className="text-accent text-xl flex flex-row items-center py-3 px-2 hover:bg-gray-100 rounded-lg transition-colors w-full text-left"
 								onClick={() => {
 									setIsOpen(false);
 									navigate("/cart");
 								}}
 							>
-								<BiCart className="text-accent text-2xl mr-2" />
+								<BiCart className="text-accent text-xl mr-3" />
 								Cart
 							</button>
+
+							{/* Divider */}
+							<hr className="my-4 border-gray-200" />
+
+							{/* Auth Buttons */}
+							{token ? (
+								<button 
+									onClick={handleLogout}
+									className="w-full bg-red-500 hover:bg-red-600 text-white px-4 py-3 rounded-lg text-lg transition-colors duration-200 font-medium"
+								>
+									Logout
+								</button>
+							) : (
+								<button 
+									onClick={handleLoginClick}
+									className="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg text-lg transition-colors duration-200 font-medium"
+								>
+									Login
+								</button>
+							)}
 						</div>
 					</div>
 				</div>
 			)}
-			<img
-				className="w-[150px] h-[80px] object-cover absolute md:left-[40px] md:w-[130px] md:h-[130px] md:absolute left-[20px] cursor-pointer"
-				onClick={() => {
-					navigate("/");
-				}}
-				src={logo}
-				alt="Logo"
-			/>
-			<GiHamburgerMenu className="text-white text-4xl absolute md:hidden left-[40px]" onClick={
-                ()=>{
-                    setIsOpen(true);
-                }
-            }/>
-			<div className="hidden w-full md:flex justify-center items-center">
-				<Link to="/" className="text-black text-xl hover:text-blue-300 hover:border-b-2 border-blue-300 ">
-					Home
-				</Link>
-				<Link to="/products" className="ml-4 text-black text-xl hover:text-blue-300 hover:border-b-2 border-blue-300">
-					Products
-				</Link>
-				<Link to="/reviews" className="ml-4 text-black text-xl hover:text-blue-300 hover:border-b-2 border-blue-300">
-					Reviews
-				</Link>
-				
-				<Link to="/contact-us" className="ml-4 text-black text-xl hover:text-blue-300 hover:border-b-2 border-blue-300">
-					Contact Us
-				</Link>
-				<Link to="/cart" className="absolute right-[250px] ">
-					<BiCart className="text-black text-3xl ml-4" />
-				</Link>
-                <button 
-                    onClick={handleLoginClick}
-                    className="absolute right-[50px] bg-blue-400 hover:bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-md text-lg transition-colors duration-200"
-                >
-                    Login
-                </button>
 
-				{
-					token!=null&&<button className="absolute  bg-red-400 hover:bg-red-600 px-4 py-2 rounded-md  right-[140px] text-white text-xl ml-4" onClick={
-						()=>{
-							localStorage.removeItem("token");
-							navigate("/login");
-						}
-					}>
+			{/* Logo */}
+			<div className="flex items-center">
+				<button
+					className="text-white text-2xl mr-3 p-2 hover:bg-white hover:bg-opacity-10 rounded-full transition-colors md:hidden"
+					onClick={() => setIsOpen(true)}
+				>
+					<GiHamburgerMenu />
+				</button>
+				<img
+					className="w-[100px] h-[50px] sm:w-[120px] sm:h-[60px] lg:w-[150px] lg:h-[80px] object-cover cursor-pointer"
+					onClick={() => navigate("/")}
+					src={logo}
+					alt="Logo"
+				/>
+			</div>
+
+			{/* Desktop Navigation */}
+			<nav className="hidden md:flex items-center space-x-8">
+				{navigationItems.map((item) => (
+					<Link
+						key={item.path}
+						to={item.path}
+						className="text-black text-lg lg:text-xl hover:text-blue-400 hover:border-b-2 border-blue-400 pb-1 transition-all duration-200"
+					>
+						{item.label}
+					</Link>
+				))}
+			</nav>
+
+			{/* Desktop Right Side */}
+			<div className="hidden md:flex items-center space-x-4">
+				{/* Cart Icon */}
+				<Link 
+					to="/cart" 
+					className="text-black hover:text-blue-400 transition-colors p-2 rounded-full hover:bg-gray-100"
+				>
+					<BiCart className="text-2xl lg:text-3xl" />
+				</Link>
+
+				{/* Auth Buttons */}
+				{token ? (
+					<button 
+						onClick={handleLogout}
+						className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-lg transition-colors duration-200 font-medium"
+					>
 						Logout
 					</button>
-				}
+				) : (
+					<button 
+						onClick={handleLoginClick}
+						className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-lg transition-colors duration-200 font-medium"
+					>
+						Login
+					</button>
+				)}
 			</div>
+
+			{/* Mobile Cart Icon (visible only on mobile) */}
+			<Link 
+				to="/cart" 
+				className="text-white hover:text-blue-200 transition-colors p-2 rounded-full md:hidden"
+			>
+				<BiCart className="text-2xl" />
+			</Link>
 		</header>
 	);
 }
